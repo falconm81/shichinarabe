@@ -316,6 +316,12 @@ $(document).ready(function(){
     return 0;
   }
 
+  <!-- 指定番号のカードを表示する -->
+  function displayCardNum(x){
+    var posStr = '#cardnum' + x;
+    $(posStr).css("visibility","visible");
+  }
+
   <!-- 指定位置のカードを非表示にする -->
   function nodisplay(x, y){
     var posStr = '#card' + y + x;
