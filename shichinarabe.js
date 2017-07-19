@@ -39,10 +39,13 @@ $(document).ready(function(){
       if(idx==4)idx=0;
     }
 
-    <!-- 同じ数値のカードを捨てる -->
-    // for(var i=0; i<4; i++){
-    //   cardChk(i);
-    // }
+    <!-- 7 のカードを場に出す -->
+    for(var i=0; i<4; i++){
+      cardChk7(i);
+    }
+    for(var i=0; i<4; i++){
+      displayCardNum(i*13+6);
+    }
 
     <!-- プレイヤーのカードを表示する -->
     dispPlayerAllCard();
@@ -214,22 +217,14 @@ $(document).ready(function(){
     }
   }
 
-  <!-- 同じ数値のカードを確認する。 -->
-  <!-- 同じ数値のカードは、-1にする。 -->
-  function cardChk(idx){
+  <!-- 数字の7 を検索し、7 を捨てる -->
+  function cardChk7(idx){
     var arr = handcard[idx];
     var num = arr.length;
-    for( var i=0; i<num-1; i++ ){
-      if( arr[i]!=-1 && arr[i] != 52){
-        for( var j=i+1; j<num; j++){
-          if( arr[j]!=-1 && arr[j] != 52){
-            if( arr[i]%13 == arr[j]%13 ){
-              arr[i] = -1;
-              arr[j] = -1;
-              break;
-            }
-          }
-        }
+    for( var i=0; i<num; i++ ){
+      if( arr[i] % 13 == 6){
+        <!-- 数値が7 の場合 -->
+        arr[i] = -1;
       }
     }
     cardSride(idx);
