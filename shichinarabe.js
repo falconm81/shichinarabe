@@ -55,6 +55,7 @@ $(document).ready(function(){
     for(var i=1; i<4; i++){
       dispComputerAllCard(i)
     }
+    decideNextPlayer();
     exeNextPlayer();
   });
 
@@ -64,7 +65,14 @@ $(document).ready(function(){
       turnPlayer++;
       if( turnPlayer == 4 ){
         turnPlayer=0;
-        break;
+
+        <!-- プレイヤーが場に出せるカードがなかったら自動的にパス -->
+        for( var i=0; i < handcard[turnPlayer].length; i++ ){
+          if( checkPutOutCard(i,turnPlayer) == 1 ){
+            break;
+          }
+        }
+        continue;
       }else{
         if( fin[turnPlayer] == 0 ){
           break;
@@ -76,11 +84,6 @@ $(document).ready(function(){
   <!-- 次のプレイヤーの処理をする -->
   function exeNextPlayer(){
     if (turnPlayer == 0){
-      for(var i=1; i<4; i++){
-        if( fin[i]==0){
-          break;
-        }
-      }
       displayMessage("プレイヤーの番です。場に出すカードをクリックしてください。");
     }else{
       displayMessage("コンピューター"+ (turnPlayer) +"カードを場に出します。");
@@ -109,44 +112,6 @@ $(document).ready(function(){
     exeNextPlayer();
   }
 
-  <!-- コンピューターがカードを捨てる -->
-　function throwCardComputer(){
-
-    cardChk(turnPlayer);
-
-    if ( handcard[turnPlayer].length != 0 ){
-      shuffle(handcard[turnPlayer], 10);
-    }
-
-    dispComputerAllCard(turnPlayer);
-
-    <!-- コンピューターのカードがなくなった時の処理 -->
-    var ret = setRank(turnPlayer);
-
-    if( ret == 0 ){
-      <!-- 次のプレイヤーを検索 -->
-      decideNextPlayer();
-      exeNextPlayer();
-    }else{
-      enabledStart();
-    }
-  }
-
-  <!-- プレイヤーがカードを捨てる -->
-  function throwCardPlayer(){
-    cardChk(0);
-
-    dispPlayerAllCard();
-
-    <!-- カードがなくなった時の処理 -->
-    var ret = setRank(turnPlayer);
-    if( ret == 0 ){
-      decideNextPlayer();
-      exeNextPlayer();
-    }else{
-      enabledStart();
-    }
-  }
 
   <!-- カードをクリックしたときの処理 -->
   function clickCard( x, y ){
@@ -158,24 +123,9 @@ $(document).ready(function(){
       cardSride(0);
       dispPlayerAllCard();
     }
+    decideNextPlayer();
+    exeNextPlayer();
 
-    <!-- プレイヤーのカードを追加 -->
-    // handcard[0].push(handcard[y][x]);
-    // if(handcard[y][x]!=52){
-    //   display( handcard[0].length-1, 0, handcard[y][x]);
-    // }else{
-    //   displayJoker(handcard[0].length-1,0);
-    // }
-
-    <!-- コンピューターのカードを削除 -->
-    // handcard[y][x]=-1;
-    // nodisplay( handcard[y].length-1, y);
-    // cardSride(y);
-
-    <!-- コンピューターのカードがなくなった時の処理 -->
-    // setRank(y);
-    //
-    // setTimeout(function(){throwCardPlayer();}, 1000);
   }
 
   <!-- カードをシャッフルする -->
