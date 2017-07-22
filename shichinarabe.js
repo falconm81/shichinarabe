@@ -124,7 +124,15 @@ $(document).ready(function(){
       handcard[0][x] = -1;
       cardSride(0);
       dispPlayerAllCard();
+    }else{
+      return;
     }
+
+    <!-- カードがなくなった -->
+    if( setRank(idx) == 1 ){
+      return;
+    }
+
     decideNextPlayer();
     exeNextPlayer();
 
