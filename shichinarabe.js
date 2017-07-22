@@ -67,7 +67,7 @@ $(document).ready(function(){
         turnPlayer=0;
 
         <!-- プレイヤーが場に出せるカードがなかったら自動的にパス -->
-        for( var i=0; i < handcard[turnPlayer].length; i++ ){
+        for( var i=0; i < handcard[0].length; i++ ){
           for(var j=0; j<8; j++){
             if( handcard[0][i] == putoutCard[j] ){
               return;
