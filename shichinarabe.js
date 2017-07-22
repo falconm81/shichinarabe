@@ -61,7 +61,7 @@ $(document).ready(function(){
 
   <!-- 次のプレイヤーを決定する -->
   function decideNextPlayer(){
-    for( var i=0; i<4; i++ ){
+    for( var i=0; i<10; i++ ){
       turnPlayer++;
       if( turnPlayer == 4 ){
         turnPlayer=0;
@@ -104,7 +104,7 @@ $(document).ready(function(){
         dispComputerAllCard(turnPlayer);
 
         <!-- カードがなくなった -->
-        if( setRank(idx) == 1 ){
+        if( setRank(turnPlayer) == 1 ){
           return;
         }
         break;
@@ -129,7 +129,7 @@ $(document).ready(function(){
     }
 
     <!-- カードがなくなった -->
-    if( setRank(idx) == 1 ){
+    if( setRank(0) == 1 ){
       return;
     }
 
