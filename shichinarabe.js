@@ -179,8 +179,14 @@ $(document).ready(function(){
       if( handcard[y][x] == putoutCard[i] ){
         if( i < 4 ){
           putoutCard[i]--;
+          if( putoutCard[i] % 13 == 12){
+            putoutCard[i] = -1;
+          }
         }else{
           putoutCard[i]++;
+          if( putoutCard[i] % 13 == 0){
+            putoutCard[i] = -1;
+          }
         }
         return 1;
       }
