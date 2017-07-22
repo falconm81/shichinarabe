@@ -68,8 +68,10 @@ $(document).ready(function(){
 
         <!-- プレイヤーが場に出せるカードがなかったら自動的にパス -->
         for( var i=0; i < handcard[turnPlayer].length; i++ ){
-          if( checkPutOutCard(i,turnPlayer) == 1 ){
-            break;
+          for(var j=0; j<8; j++){
+            if( handcard[0][i] == putoutCard[j] ){
+              return;
+            }
           }
         }
         continue;
