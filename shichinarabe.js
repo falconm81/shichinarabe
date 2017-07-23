@@ -322,18 +322,6 @@ $(document).ready(function(){
     $(posStr).css("visibility","visible");
   }
 
-  <!-- 指定位置にジョーカーを表示する -->
-  function displayJoker( x, y ){
-    var posStr = '#card' + y + x;
-    var left = x*50;
-    var top = y*100;
-    var rect = 'rect( 450px 251px 526px 200px)';
-    $(posStr).css("left", left);
-    $(posStr).css("top", top);
-    $(posStr).css("clip", rect);
-    $(posStr).css("visibility","visible");
-  }
-
   <!-- 指定位置に裏を表示する -->
   function displayBack( x, y ){
     var posStr = '#card' + y + x;
