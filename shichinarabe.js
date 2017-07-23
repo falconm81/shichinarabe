@@ -3,7 +3,7 @@ $(document).ready(function(){
   var handcard;
   var fin;
   var turnPlayer;
-  var putoutCard = [5, 18, 31, 44, 7, 20, 33, 46];
+  var putoutCard;
 
 
   <!-- 開始ボタン押し -->
@@ -17,6 +17,8 @@ $(document).ready(function(){
       fin[i] = 0;
       nodisplayRank(i);
     }
+    putoutCard = [5, 18, 31, 44, 7, 20, 33, 46];
+    nodisplayCardAll();
 
     <!-- 山札 -->
     var deck = [];
@@ -57,6 +59,7 @@ $(document).ready(function(){
     }
     decideNextPlayer();
     exeNextPlayer();
+    disabledStart();
   });
 
   <!-- 次のプレイヤーを決定する -->
@@ -105,6 +108,8 @@ $(document).ready(function(){
 
         <!-- カードがなくなった -->
         if( setRank(turnPlayer) == 1 ){
+          displayMessage("開始を押してください。");
+          enabledStart();
           return;
         }
         break;
@@ -130,6 +135,8 @@ $(document).ready(function(){
 
     <!-- カードがなくなった -->
     if( setRank(0) == 1 ){
+      displayMessage("開始を押してください。");
+      enabledStart();
       return;
     }
 
@@ -268,10 +275,23 @@ $(document).ready(function(){
     return 0;
   }
 
+  <!-- 場のすべてのカードを非表示にする -->
+  function nodisplayCardAll(){
+    for( var i=0; i<52; i++ ){
+      nodisplayCardNum(i);
+    }
+  }
+
   <!-- 指定番号のカードを表示する -->
   function displayCardNum(x){
     var posStr = '#cardnum' + x;
     $(posStr).css("visibility","visible");
+  }
+
+  <!-- 指定番号のカードを非表示にする -->
+  function nodisplayCardNum(x){
+    var posStr = '#cardnum' + x;
+    $(posStr).css("visibility","hidden");
   }
 
   <!-- 指定位置のカードを非表示にする -->
